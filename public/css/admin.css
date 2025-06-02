@@ -1,0 +1,516 @@
+/* RESET Y BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f0f4f8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header fijo arriba */
+.admin-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(135deg, #1a2a3a 0%, #142850 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  color: white;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.admin-header h1 {
+    color: white;
+    font-size: 1.6rem;
+    margin: 0; 
+    flex-grow: 1; 
+    text-align: center;
+}
+
+.admin-header .btn-back-to-shop { 
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.5rem 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.admin-header .btn-back-to-shop:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.admin-sidebar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 220px;
+  height: calc(100vh - 60px);
+  background: linear-gradient(135deg, #1a2a3a 0%, #142850 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+  z-index: 999;
+  align-items: center;
+  overflow-y: auto;
+}
+
+/* LOGO */
+.logo-container {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.logo-admin {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* NAVEGACIÓN */
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  align-items: center;
+  padding: 0.1rem;
+}
+.admin-nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.8rem 1rem;
+  width: 100%;
+  text-align: center;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+.admin-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.admin-nav a.active {
+    background-color: rgba(255, 255, 255, 0.35);
+    border-left: 4px solid #2a9d8f;
+    padding-left: calc(1rem - 4px);
+}
+
+/* CONTENIDO PRINCIPAL */
+main {
+  margin-top: 60px;
+  margin-left: 220px;
+  padding: 20px;
+  min-height: calc(100vh - 60px);
+  background-color: #f0f4f8;
+}
+
+/* SECCIÓN PANEL DE ADMINISTRACIÓN */
+.admin-panel-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.admin-panel-content h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #1a2a3a;
+    font-size: 2.2rem;
+}
+.admin-panel-content p {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #555;
+}
+.btn-create-product {
+    display: block; 
+    width: fit-content;
+    margin: 0 auto 2rem auto;
+    padding: 12px 25px;
+    background-color: #2a9d8f;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.btn-create-product:hover {
+    background-color: #21867a;
+    transform: translateY(-2px);
+}
+
+/* LISTA DE PRODUCTOS EN EL PANEL DE ADMINISTRACIÓN */
+.admin-product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+  gap: 25px;
+  list-style: none;
+  padding: 0; 
+  margin: 0; 
+}
+.admin-product-item {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  overflow: hidden;
+  padding: 15px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-height: 380px;
+}
+.admin-product-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+.admin-product-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+.admin-product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.admin-product-info h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #444;
+  text-align: center;
+}
+main h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #1a2a3a;
+}
+.bg-teal {
+  background-color: #2bbbad;
+  color: white;
+}
+.bg-teal:hover {
+  background-color: #22a295;
+}
+
+/* ================================================= */
+/* ACCIONES DE LOS BOTONES (EDITAR / ELIMINAR) */
+/* ================================================= */
+.admin-product-actions {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 10px; 
+    border-top: 1px solid #f0f0f0;
+}
+.admin-btn-edit,
+.admin-btn-delete { 
+    flex: 1; 
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    font-size: 0.95rem;
+}
+.admin-btn-edit {
+    background-color: #ee7e15; /* Azul Bootstrap por ejemplo */
+}
+.admin-btn-edit:hover {
+    background-color: #f1c80f;
+    transform: translateY(-2px);
+}
+.admin-btn-delete {
+    background-color: #eb273b; /* Rojo Bootstrap por ejemplo */
+}
+.admin-btn-delete:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+.form-delete {
+    margin: 0;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* ================================================= */
+/* ESTILOS PARA EL FORMULARIO DE CREACIÓN (en views/products/createProduct.ejs) */
+/* ================================================= */
+.form-container { 
+    max-width: 600px;
+    margin: 2rem auto;
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1a2a3a;
+  font-size: 2.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.8rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+  color: #444;
+  font-size: 1.1rem;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"],
+select {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  font-size: 1.15rem; 
+  border-radius: 10px;
+  border: 1px solid #d4d4d4;
+  background-color: #ffffff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+select:focus {
+  border-color: #2a9d8f;
+  box-shadow: 0 0 0 4px rgba(42, 157, 143, 0.25);
+  outline: none;
+}
+
+input[type="file"] {
+    background-color: #e9ecef;
+    padding: 0.9rem;
+    cursor: pointer;
+}
+
+
+.button-group {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+button[type="submit"] {
+  width: 100%;
+  background-color: #2a9d8f;
+  color: white;
+  font-size: 1.2rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+button[type="submit"]:hover {
+  background-color: #21867a;
+  transform: translateY(-3px);
+}
+
+a.btn-outline-custom {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.9rem;
+  background-color: transparent;
+  color: #2a9d8f;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid #2a9d8f;
+  border-radius: 10px;
+  transition: all 0.3s ease, transform 0.2s ease;
+  font-size: 1.1rem;
+}
+
+a.btn-outline-custom:hover {
+  background-color: #2a9d8f;
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* ================================================= */
+/* RESPONSIVE AJUSTES */
+/* ================================================= */
+
+@media (max-width: 992px) {
+    .admin-sidebar {
+        width: 180px;
+    }
+    main {
+        margin-left: 180px;
+    }
+    .admin-product-list {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+    }
+    .admin-product-item {
+        min-height: 350px;
+    }
+    .admin-product-img {
+        height: 140px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .admin-header {
+        height: auto;
+        flex-direction: column;
+        padding: 1rem;
+        text-align: center;
+        justify-content: center;
+    }
+    .admin-header h1 {
+        margin-bottom: 0.5rem;
+    }
+    .admin-header .btn-back-to-shop {
+        margin-top: 0.5rem;
+    }
+
+    .admin-sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        box-shadow: none; 
+        padding-top: 0;
+        flex-direction: row; 
+        justify-content: space-around;
+        flex-wrap: wrap;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        margin-top: 0;
+        top: auto;
+    }
+    .admin-sidebar .logo-container {
+        display: none; 
+    }
+    .admin-sidebar .admin-nav {
+        flex-direction: row; 
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1rem 0;
+    }
+    .admin-sidebar .admin-nav a {
+        width: auto;
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    .admin-sidebar .admin-nav a.active {
+        border-left: none;
+        border-bottom: 2px solid #2a9d8f;
+        padding-bottom: calc(0.6rem - 2px);
+    }
+
+
+    main {
+        margin-top: 0;
+        margin-left: 0;
+        padding: 1rem;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .admin-panel-content {
+        padding: 0;
+    }
+    .btn-create-product {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+    .admin-product-list {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .admin-product-item {
+        min-height: auto;
+        padding: 10px;
+    }
+    .admin-product-img {
+        height: 120px;
+        margin-bottom: 10px;
+    }
+    .admin-product-info h3 {
+        font-size: 1rem;
+    }
+    .admin-product-info p {
+        font-size: 0.95rem;
+    }
+    .admin-btn-edit,
+    .admin-btn-delete {
+        padding: 7px;
+        font-size: 0.85rem;
+    }
+    .form-container {
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+    .form-container h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    label {
+        font-size: 1rem;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="file"],
+    select {
+        padding: 0.7rem 0.9rem;
+        font-size: 1rem;
+        border-radius: 8px;
+    }
+    button[type="submit"],
+    a.btn-outline-custom {
+        padding: 0.8rem;
+        font-size: 1rem;
+        border-radius: 8px;
+    }
+}
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= producto.nombre %> - Detalle del Producto</title>
+    <link rel="stylesheet" href="/css/home.css"> <%-- O el CSS específico para productos --%>
+    <link rel="stylesheet" href="/css/products.css"> <%-- Para estilos de detalle de producto --%>
+    <% if (producto.precio_original && producto.precio_original > producto.precio) { %>
+        <link rel="stylesheet" href="/css/ofertas.css"> <%-- Si hay CSS para ofertas --%>
+    <% } %>
+</head>
+<body>
+    <%- include('../partials/header') %> <%-- Incluye el header si usas parciales --%>
+
+    <main class="product-detail-container">
+        <section class="product-detail-card">
+            <div class="product-image">
+                <img src="/<%= producto.imagen %>" alt="<%= producto.nombre %>">
+                <% if (producto.precio_original && producto.precio_original > producto.precio) { %>
+                    <span class="discount-badge">
+                        -<%= ((producto.precio_original - producto.precio) / producto.precio_original * 100).toFixed(0) %>%
+                    </span>
+                <% } %>
+            </div>
+            <div class="product-info">
+                <h1><%= producto.nombre %></h1>
+                <p class="product-category">Categoría: <%= producto.categoria %></p>
+                <p class="product-description"><%= producto.descripcion %></p>
+
+                <div class="price-section">
+                    <% if (producto.precio_original && producto.precio_original > producto.precio) { %>
+                        <span class="original-price">$<%= producto.precio_original.toFixed(2) %></span>
+                        <span class="current-price offer-price">$<%= producto.precio.toFixed(2) %></span>
+                    <% } else { %>
+                        <span class="current-price">$<%= producto.precio.toFixed(2) %></span>
+                    <% } %>
+                </div>
+
+                <div class="actions">
+                    <button class="add-to-cart-button">Añadir al carrito</button>
+                    <a href="/productos" class="back-link">Volver al listado</a>
+                    <% if (typeof user !== 'undefined' && user.isAdmin) { %> <%-- Ejemplo para admin --%>
+                        <a href="/admin/productos/edit/<%= producto.id %>" class="edit-link">Editar</a>
+                        <a href="/admin/productos/delete/<%= producto.id %>" class="delete-link">Eliminar</a>
+                    <% } %>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <%- include('../partials/footer') %> <%-- Incluye el footer si usas parciales --%>
+</body>
+</html>
